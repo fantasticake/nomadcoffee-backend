@@ -1,0 +1,35 @@
+{
+  "name": "nomadcoffee-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node server.js",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fantasticake/nomadcoffee-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fantasticake/nomadcoffee-backend/issues"
+  },
+  "homepage": "https://github.com/fantasticake/nomadcoffee-backend#readme",
+  "dependencies": {
+    "@graphql-tools/load-files": "^6.6.1",
+    "@prisma/client": "^4.3.1",
+    "apollo-server": "^3.10.2",
+    "dotenv": "^16.0.2",
+    "graphql": "^16.6.0",
+    "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.19.0",
+    "prisma": "^4.3.1"
+  }
+}
