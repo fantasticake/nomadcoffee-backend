@@ -12,13 +12,28 @@ export const typeDefs = gql`
     createdAt: String!
     updatedAt: String!
   }
-  type Query {
-    users: [User]
+
+  type SeeProfileOutput {
+    ok: Boolean!
+    result: User
+    error: String
   }
+
+  type Query {
+    seeProfile: SeeProfileOutput!
+  }
+
   type SharedOutput {
     ok: Boolean!
     error: String
   }
+
+  type LoginOutput {
+    ok: Boolean!
+    token: String
+    error: String
+  }
+
   type Mutation {
     createAccount(
       username: String!
@@ -29,5 +44,9 @@ export const typeDefs = gql`
       avatarURL: String!
       githubUsername: String!
     ): SharedOutput!
+
+    login(email: String!, password: String!): LoginOutput!
+
+    editProfile(password: String, avatarURL: String): SharedOutput!
   }
 `;
