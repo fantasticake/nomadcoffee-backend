@@ -47,10 +47,6 @@ export const resolver = {
 
     editProfile: privateResolver(async (_, input, { loggedInUser }) => {
       try {
-        if (!loggedInUser) {
-          return { ok: false, error: "Cannot access" };
-        }
-
         let hash;
         if (input.password) hash = bcrypt.hashSync(input.password, saltRounds);
         await prisma.user.update({
@@ -61,6 +57,38 @@ export const resolver = {
       } catch (e) {
         console.log(e);
         return { ok: false, error: "Cannot edit profile" };
+      }
+    }),
+
+    follow: privateResolver(async (_, { userId }, { loggedInUser }) => {
+      try {
+        await prisma.user.update({
+          where: { id: loggedInUser.id },
+          data: { following: { connect: { id: userId } } },
+        });
+        return { ok: true };
+      } catch (e) {
+        console.log(e);
+        return {
+          ok: false,
+          error: "Cannot follow",
+        };
+      }
+    }),
+
+    unfollow: privateResolver(async (_, { userId }, { loggedInUser }) => {
+      try {
+        await prisma.user.update({
+          where: { id: loggedInUser.id },
+          data: { following: { disconnect: { id: userId } } },
+        });
+        return { ok: true };
+      } catch (e) {
+        console.log(e);
+        return {
+          ok: false,
+          error: "Cannot unfollow",
+        };
       }
     }),
   },

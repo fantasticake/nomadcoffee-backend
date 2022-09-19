@@ -9,6 +9,8 @@ export const typeDefs = gql`
     location: String
     avatarURL: String
     githubUsername: String
+    following(page: Int): [User]
+    followers(page: Int): [User]
     createdAt: String!
     updatedAt: String!
   }
@@ -19,8 +21,22 @@ export const typeDefs = gql`
     error: String
   }
 
+  type SeeUserOutput {
+    ok: Boolean!
+    result: User
+    error: String
+  }
+
+  type searchUsersOutput {
+    ok: Boolean!
+    result: [User]
+    error: String
+  }
+
   type Query {
     seeProfile: SeeProfileOutput!
+    seeUser(userId: Int!): SeeUserOutput!
+    searchUsers(key: String!): searchUsersOutput!
   }
 
   type SharedOutput {
@@ -44,9 +60,9 @@ export const typeDefs = gql`
       avatarURL: String!
       githubUsername: String!
     ): SharedOutput!
-
     login(email: String!, password: String!): LoginOutput!
-
     editProfile(password: String, avatarURL: String): SharedOutput!
+    follow(userId: Int!): SharedOutput!
+    unfollow(userId: Int!): SharedOutput!
   }
 `;
