@@ -39,11 +39,6 @@ export const typeDefs = gql`
     searchUsers(key: String!): searchUsersOutput!
   }
 
-  type SharedOutput {
-    ok: Boolean!
-    error: String
-  }
-
   type LoginOutput {
     ok: Boolean!
     token: String
