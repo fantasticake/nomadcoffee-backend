@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node build/server.js",
+    "prestart": "prisma migrate deploy",
     "build": "babel src -d build",
     "start:dev": "nodemon --exec babel-node src/server.js",
     "prisma:migrate": "prisma migrate dev",
