@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js",
+    "start": "node build/server.js",
+    "build": "babel src -d build",
+    "start:dev": "nodemon --exec babel-node src/server.js",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio"
   },
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/fantasticake/nomadcoffee-backend#readme",
   "dependencies": {
+    "@babel/cli": "^7.18.10",
     "@graphql-tools/load-files": "^6.6.1",
     "@prisma/client": "^4.3.1",
     "apollo-server": "^3.10.2",

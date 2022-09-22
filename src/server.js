@@ -13,6 +13,7 @@ async function start() {
     schema,
     csrfPrevention: true,
     cache: "bounded",
+    introspection: true,
     plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
     context: async ({ req: { headers } }) => {
       try {
