@@ -5,10 +5,11 @@ export const typeDefs = gql`
     id: Int!
     username: String!
     email: String!
-    name: String!
+    name: String
     location: String
     avatarURL: String
     githubUsername: String
+    coffeeShop: CoffeeShop
     following(page: Int): [User]
     followers(page: Int): [User]
     createdAt: String!
@@ -50,10 +51,10 @@ export const typeDefs = gql`
       username: String!
       email: String!
       password: String!
-      name: String!
-      location: String!
-      avatarURL: String!
-      githubUsername: String!
+      name: String
+      location: String
+      avatarURL: String
+      githubUsername: String
     ): SharedOutput!
     login(email: String!, password: String!): LoginOutput!
     editProfile(password: String, avatarURL: String): SharedOutput!

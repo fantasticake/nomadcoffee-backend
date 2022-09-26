@@ -14,11 +14,11 @@ model User {
   id             Int         @id @default(autoincrement())
   username       String      @unique
   email          String      @unique
-  name           String
-  location       String
+  name           String?
+  location       String?
   password       String
-  avatarURL      String
-  githubUsername String
+  avatarURL      String?
+  githubUsername String?
   coffeeShop     CoffeeShop? @relation()
   following      User[]      @relation(name: "followRel")
   followers      User[]      @relation(name: "followRel")

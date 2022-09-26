@@ -38,6 +38,7 @@ export const resolvers = {
       try {
         const user = await prisma.user.findUnique({
           where: { id: loggedInUser.id },
+          include: { coffeeShop: true },
         });
         return { ok: true, result: user };
       } catch (e) {
