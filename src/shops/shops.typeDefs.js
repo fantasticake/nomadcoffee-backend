@@ -72,5 +72,7 @@ export const typeDefs = gql`
       photos: [Upload]
       categories: [String]
     ): SharedOutput!
+
+    deleteCoffeeShop(shopId: Int!): SharedOutput!
   }
 `;

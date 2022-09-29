@@ -94,5 +94,26 @@ export const resolver = {
         return { ok: false, error: "Cannot edit coffee shop" };
       }
     }),
+
+    deleteCoffeeShop: privateResolver(async (_, input, { loggedInUser }) => {
+      try {
+        const exists = await prisma.coffeeShop.findFirst({
+          where: { id: input.shopId, userId: loggedInUser.id },
+        });
+        if (!exists)
+          return {
+            ok: false,
+            error: "Not exists",
+          };
+
+        await prisma.coffeeShop.delete({
+          where: { id: input.shopId },
+        });
+        return { ok: true };
+      } catch (e) {
+        console.log(e);
+        return { ok: false, error: "Cannot delete coffee shop" };
+      }
+    }),
   },
 };

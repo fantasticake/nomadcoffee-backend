@@ -29,7 +29,7 @@ model User {
 model CoffeeShopPhoto {
   id        Int        @id @default(autoincrement())
   url       String
-  shop      CoffeeShop @relation(fields: [shopId], references: [id])
+  shop      CoffeeShop @relation(fields: [shopId], references: [id], onDelete: Cascade)
   shopId    Int
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
