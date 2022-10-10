@@ -22,7 +22,7 @@ export const resolver = {
         const shops = await prisma.coffeeShop.findMany({
           skip: (page - 1) * paginationTake,
           take: paginationTake,
-          include: { photos: true },
+          include: { photos: true, categories: true },
         });
         return { ok: true, result: shops };
       } catch (e) {

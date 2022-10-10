@@ -1,5 +1,5 @@
 import prisma from "../prismaClient";
-import { privateResolver, saveFile } from "../utils";
+import { privateResolver, uploadAWS } from "../utils";
 
 export const resolver = {
   Mutation: {
@@ -25,8 +25,8 @@ export const resolver = {
         if (input.photos) {
           photos = input.photos.map(photo => {
             const filename = `${loggedInUser.id}${Date.now()}.jpg`;
-            saveFile(photo, filename);
-            return { url: `http://localhost:4000/uploads/${filename}` };
+            const url = uploadAWS(photo, filename);
+            return { url };
           });
         }
         await prisma.coffeeShop.create({
@@ -68,14 +68,15 @@ export const resolver = {
             return { where: { slug }, create: { name: category, slug } };
           });
         }
-        let photos;
+        let photos = [];
         if (input.photos) {
-          photos = input.photos.map(photo => {
+          for (const photo of input.photos) {
             const filename = `${loggedInUser.id}${Date.now()}.jpg`;
-            saveFile(photo, filename);
-            return { url: `http://localhost:4000/uploads/${filename}` };
-          });
+            const url = await uploadAWS(photo, filename);
+            photos.push({ url });
+          }
         }
+
         await prisma.coffeeShop.update({
           where: { userId: loggedInUser.id },
           data: {
