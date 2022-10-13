@@ -69,5 +69,18 @@ export const resolver = {
         return { ok: false, error: "Cannot see categories" };
       }
     },
+
+    searchShops: async (_, { key }) => {
+      try {
+        const shops = await prisma.coffeeShop.findMany({
+          where: { name: { startsWith: key } },
+          include: { photos: true, categories: true },
+        });
+        return { ok: true, result: shops };
+      } catch (e) {
+        console.log(e);
+        return { ok: false, error: "Cannot search shops" };
+      }
+    },
   },
 };

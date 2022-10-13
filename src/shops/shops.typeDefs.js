@@ -49,11 +49,18 @@ export const typeDefs = gql`
     result: [Category]
   }
 
+  type SearchShopsOutput {
+    ok: Boolean!
+    result: [CoffeeShop]
+    error: String
+  }
+
   type Query {
     seeCoffeeShops(page: Int): SeeCoffeeShopsOutput!
     seeCoffeeShop(shopId: Int!): SeeCoffeeShopOutput!
     seeCategory(slug: String!, page: Int): SeeCategoryOutput!
     seeCategories(page: Int): SeeCategoriesOutput!
+    searchShops(key: String!): SearchShopsOutput!
   }
 
   type Mutation {
